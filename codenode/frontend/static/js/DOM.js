@@ -94,19 +94,18 @@ Notebook.DOM._content = function() {
 };
 
 Notebook.DOM._textarea = function() {
-    var node = $.TEXTAREA({
+    var node = $.DIV({
             'class':'input',
-            'cols':'1',
-            'rows':'1'
+            'contenteditable': 'true',            
+            'textcontent': 'test'            
             });
     return node;
 };
 
 Notebook.DOM._textoutput = function() {
-    var node = $.TEXTAREA({
+    var node = $.DIV({
             'class':'outputtext',
-            'cols':'1',
-            'rows':'1'
+            'contenteditable': 'true',           
             });
     /*
     var node = $.SPAN({

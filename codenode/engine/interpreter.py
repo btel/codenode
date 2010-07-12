@@ -16,6 +16,10 @@ abstracted out completly
 
 """
 
+from pygments import highlight
+from pygments.lexers import PythonLexer
+from pygments.formatters import HtmlFormatter
+
 import sys
 import re
 from code import softspace, InteractiveInterpreter
@@ -51,9 +55,11 @@ class Interpreter(InteractiveInterpreter):
         self.interrupted = False
 
     def _result_dict(self, out, cellstyle='outputtext', in_string='', err='', in_count='', cmd_count=''):
+        in_highl = highlight(in_string, PythonLexer(), HtmlFormatter())
+
         return {'input_count':in_count, 
                     'cmd_count':cmd_count, 
-                    'in':in_string, 
+                    'in':in_highl, 
                     'out':out, 
                     'cellstyle': cellstyle,
                     'err':err}
@@ -69,6 +75,7 @@ class Interpreter(InteractiveInterpreter):
     def evaluate(self, input_string):
         """give the input_string to the python interpreter in the
         usernamespace"""
+        in_highl = highlight(input_string, PythonLexer(), HtmlFormatter())
         self.output_trap.set()
         command_count = self._runcommands(input_string)
         stdout, stderr = self.output_trap.get_values()
@@ -77,7 +84,7 @@ class Interpreter(InteractiveInterpreter):
         self.input_count += 1
         result = {'input_count':self.input_count, 
                     'cmd_count':command_count, 
-                    'in':input_string, 
+                    'in':in_highl, 
                     'cellstyle': cellstyle,
                     'out':stdout, 
                     'err':stderr}

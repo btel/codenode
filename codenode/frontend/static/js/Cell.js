@@ -147,6 +147,11 @@ Notebook.Cell.prototype.setAsGroup = function() {
 
 Notebook.Cell.prototype.setType = function() {
     switch(this.celltype) {
+        case 'formatedinput':
+            $(this.contentNode()).append(Notebook.dom._textarea());
+            this.textareaNode().cellid = this.id;
+            this.textareaNode().eventtype = 'input';
+            break;
         case 'input':
             $(this.contentNode()).append(Notebook.dom._textarea());
             this.textareaNode().cellid = this.id;
@@ -530,7 +535,7 @@ Notebook.Cell.prototype.clearNumberLabel = function() {
 Notebook.Cell.prototype.content = function(newcontent) {
     if (!newcontent) {
         if (this.celltype == 'input') {
-            return this.contentNode().childNodes[0].value;
+            return this.contentNode().childNodes[0].textContent;
         } 
         if (this.celltype == 'output') {
             switch (this.cellstyle) {
@@ -545,7 +550,7 @@ Notebook.Cell.prototype.content = function(newcontent) {
         }
     } else {
         if (this.celltype == 'input') {
-            this.contentNode().childNodes[0].value = newcontent;
+            this.contentNode().childNodes[0].textContent = newcontent;
             this.oldcontent = newcontent;
         } 
         if (this.celltype == 'output') {
@@ -601,8 +606,8 @@ Notebook.Cell.prototype.adjustTextarea = function() {
         var rows = this.content().split('\n').length;
         this.textareaNode().rows = rows;
         var h = $(this.textareaNode()).height();
-        //h += getElementDimensions(this.spawnerNode()).h;
-        //$(this).height(h);
+        h += getElementDimensions(this.spawnerNode()).h;
+        $(this).height(h);
         return true;
     } else if (this.cellstyle == 'outputtext') {
         var rows = this.content().split('\n').length;

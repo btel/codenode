@@ -99,6 +99,7 @@ Notebook.Async.evalSuccess = function(response) {
     //$('#'+cellid)[0].saved = true; //not evaluating
     //This is where numbering of cells could go.
     $('#'+cellid)[0].numberLabel(incount);
+    $('#'+cellid)[0].content(response.in);
     var cellstyle = response.cellstyle;
     var content = response.out + response.err;
     t.spawnOutputCellNode(cellid, cellstyle, content, outcount);
