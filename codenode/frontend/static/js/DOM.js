@@ -94,10 +94,9 @@ Notebook.DOM._content = function() {
 };
 
 Notebook.DOM._textarea = function() {
-    var node = $.TEXTAREA({
+    var node = $.DIV({
             'class':'input',
-            'cols':'1',
-            'rows':'1'
+            'contenteditable':'True'
             });
     return node;
 };
