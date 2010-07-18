@@ -530,7 +530,9 @@ Notebook.Cell.prototype.clearNumberLabel = function() {
 Notebook.Cell.prototype.content = function(newcontent) {
     if (!newcontent) {
         if (this.celltype == 'input') {
-            return this.contentNode().childNodes[0].value;
+            var content = this.contentNode().childNodes[0].innerHTML;
+            content = content.replace(/<br.*?>/g, "\n")
+            return content.replace(/<.*?>/g, "\n")
         } 
         if (this.celltype == 'output') {
             switch (this.cellstyle) {
@@ -545,7 +547,8 @@ Notebook.Cell.prototype.content = function(newcontent) {
         }
     } else {
         if (this.celltype == 'input') {
-            this.contentNode().childNodes[0].value = newcontent;
+            newcontentHTML = newcontent.replace(/\n/gi, "<br /> \n");
+            this.contentNode().childNodes[0].innerHTML = newcontentHTML;
             this.oldcontent = newcontent;
         } 
         if (this.celltype == 'output') {

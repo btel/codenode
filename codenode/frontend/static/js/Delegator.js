@@ -521,7 +521,7 @@ Notebook.__init__.Delegator = function() {
                                     spawnerUpArrowAction]
         },
         'div.cell input': {
-            'textarea.input': [adjustCellAction,
+            'div.input': [adjustCellAction,
                                 cellUpArrowAction,
                                 cellDownArrowAction,
                                 evalAction,
