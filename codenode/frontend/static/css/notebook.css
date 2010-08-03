@@ -199,7 +199,7 @@ ul#printers li a {
 }
 
 
-textarea.input {
+div.input {
     border-style: none;
     overflow: hidden;
     height: 2em;
@@ -246,7 +246,7 @@ textarea.spawninput:focus {
 
 /******************************************/
 /** Specific cell content styles **/
-.cell .contents textarea.input {
+.cell .contents div.input {
     font-family: monospace;
     line-height: normal;*
     font-size: 13px;

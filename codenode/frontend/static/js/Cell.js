@@ -532,7 +532,8 @@ Notebook.Cell.prototype.content = function(newcontent) {
         if (this.celltype == 'input') {
             var content = this.contentNode().childNodes[0].innerHTML;
             content = content.replace(/<br.*?>/g, "\n")
-            return content.replace(/<.*?>/g, "\n")
+            content = content.replace(/&nbsp;/gi, " ")
+            return content.replace(/<.*?>/g, "")
         } 
         if (this.celltype == 'output') {
             switch (this.cellstyle) {
@@ -547,7 +548,7 @@ Notebook.Cell.prototype.content = function(newcontent) {
         }
     } else {
         if (this.celltype == 'input') {
-            newcontentHTML = newcontent.replace(/\n/gi, "<br /> \n");
+            newcontentHTML = newcontent.replace(/\n/gi, "<br />");
             this.contentNode().childNodes[0].innerHTML = newcontentHTML;
             this.oldcontent = newcontent;
         } 
@@ -748,8 +749,17 @@ Notebook.Cell.prototype.evaluate = function() {
     if (this.evaluatable) {
         this.evaluating = 2;
         this.highlightBracket()
+        //remove HTML tags        
+        var content = this.content()
+        content = content.replace(/<br.*?>/g, "\n")
+        content = content.replace(/&nbsp;/gi, " ")
+        content = content.replace(/<.*?>/g, "")
+        content = content.replace(/&lt;/gi, "<")
+        content = content.replace(/&gt;/gi, ">")
+        this.content(content)
+        prettyPrint()
         //!! reference to ASYNC
-        Notebook.Async.evalCell(this.id,this.content());
+        Notebook.Async.evalCell(this.id, content);
     }
 };
 

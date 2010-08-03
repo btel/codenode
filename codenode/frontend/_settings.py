@@ -103,7 +103,8 @@ COMPRESS_CSS = {
         'output_filename': 'css/bookshelf_compressed.css',
     },
     'notebook': {
-        'source_filenames': ('css/notebook.css', ),
+        'source_filenames': ('css/notebook.css',
+                             'external/prettify/prettify.css',),
         'output_filename': 'css/notebook_compressed.css',
     }
 }
@@ -113,7 +114,8 @@ COMPRESS_JS = {
         'source_filenames': ('external/jquery.min.js', 'external/jquery-ui.min.js', 
                 'external/jquery.color.js', 'external/jquery.dom.js', 
                 'external/jquery.contextmenu.js', 'external/jqModal.dev.js',
-                'external/splitter.js', 'js/bookshelf.js'),
+                'external/splitter.js',
+                'js/bookshelf.js'),
         'output_filename': 'js/bookshelf_compressed.js',
     },
 
@@ -124,7 +126,9 @@ COMPRESS_JS = {
                 'js/Cell.js', 'js/Async.js', 'js/Delegator.js', 'js/DOM.js', 
                 'js/SaveLoad.js', 'js/Spawner.js', 'js/TreeBranch.js', 'js/Completer.js', 
                 'js/Util.js', 'external/json2.js', 'external/jquery.dimensions.js',
-            'external/jquery.fieldselection.js', 'external/jqModal.dev.js'),
+                'external/jquery.fieldselection.js', 'external/jqModal.dev.js',
+                'external/prettify/prettify.js',
+            ),
         'output_filename': 'js/notebook_compressed.js',
     }
 }

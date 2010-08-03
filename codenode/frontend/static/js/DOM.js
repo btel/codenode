@@ -94,8 +94,8 @@ Notebook.DOM._content = function() {
 };
 
 Notebook.DOM._textarea = function() {
-    var node = $.DIV({
-            'class':'input',
+    var node = $.PRE({
+            'class':'input prettyprint',
             'contentEditable':'true'
             });
     return node;

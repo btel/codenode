@@ -521,7 +521,7 @@ Notebook.__init__.Delegator = function() {
                                     spawnerUpArrowAction]
         },
         'div.cell input': {
-            'div.input': [adjustCellAction,
+            'pre.input prettyprint': [adjustCellAction,
                                 cellUpArrowAction,
                                 cellDownArrowAction,
                                 evalAction,
